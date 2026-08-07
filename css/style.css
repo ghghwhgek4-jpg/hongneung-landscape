@@ -885,3 +885,22 @@ nav a.active::after {
     margin-top:5px;
 
 }
+@media(max-width:768px){
+
+nav a.active {
+
+    background:#f1f8f1;
+
+    border-radius:10px;
+
+}
+
+
+nav a.active::after {
+
+    display:none;
+
+}
+
+
+}
