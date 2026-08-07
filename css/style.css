@@ -60,7 +60,11 @@ nav a:hover {
         rgba(0,0,0,0.35),
         rgba(0,0,0,0.35)
     ),
-    url("/hongneung-landscape/images/main.jpg");
+    .hero {
+    background-image: url("/images/main.jpg");
+    background-size: cover;
+    background-position: center;
+}
 
     background-size: cover;
     background-position: center;
