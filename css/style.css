@@ -573,3 +573,11 @@ height:180px;
     width: auto;
     display: block;
 }
+.logo a {
+    display:flex;
+    align-items:center;
+}
+
+.logo img {
+    height:55px;
+}
