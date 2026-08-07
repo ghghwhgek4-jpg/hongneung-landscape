@@ -15,7 +15,7 @@ body {
 
 header {
     width: 100%;
-    height: 80px;
+    height: 100px;
     background: #ffffff;
     display: flex;
     justify-content: space-between;
@@ -52,7 +52,7 @@ nav a:hover {
 /* 메인 이미지 영역 */
 
 .hero {
-
+padding-top: 100px;
     height: 100vh;
 
     background:
@@ -564,10 +564,12 @@ height:180px;
 
 }
 .logo {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
 }
 
 .logo img {
-    height:55px;
+    height: 80px;
+    width: auto;
+    display: block;
 }
