@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hongneung-landscape.pages.dev/sitemap.xml
