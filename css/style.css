@@ -773,3 +773,89 @@ nav#mobile-menu.active {
 
 
 }
+/* =========================
+   모바일 화면 최적화
+========================= */
+
+@media(max-width:768px){
+
+
+/* 하단 전화 버튼 공간 확보 */
+
+body {
+
+    padding-bottom:80px;
+
+}
+
+
+
+/* 상단 메뉴가 전화 버튼 위로 나오도록 */
+
+nav#mobile-menu {
+
+    max-height:calc(100vh - 160px);
+
+    overflow-y:auto;
+
+}
+
+
+
+/* 햄버거 메뉴 열림 시 */
+
+nav#mobile-menu.active {
+
+    display:block;
+
+}
+
+
+
+/* 하단 고정 전화 버튼 */
+
+.floating-buttons {
+
+    position:fixed;
+
+    left:0;
+
+    bottom:0;
+
+    width:100%;
+
+    height:70px;
+
+    z-index:3000;
+
+}
+
+
+
+.call-btn {
+
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:18px;
+
+}
+
+
+
+/* 로고 크기 조정 */
+
+.logo img {
+
+    height:45px;
+
+}
+
+
+
+}
