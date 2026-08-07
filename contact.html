@@ -72,17 +72,24 @@
 <body>
 
 
-<header>
 
+<header>
 
 <div class="logo">
 
+<a href="index.html">
 <img src="images/logo.png" alt="홍능조경">
+</a>
 
 </div>
 
 
-<nav>
+<div class="menu-btn" onclick="toggleMenu()">
+☰
+</div>
+
+
+<nav id="mobile-menu">
 
 <a href="index.html">홈</a>
 
@@ -96,7 +103,6 @@
 
 
 </header>
-
 
 
 
@@ -327,7 +333,17 @@ Q. 조경관리 상담도 가능한가요?
 
 </footer>
 
+<script>
 
+function toggleMenu(){
+
+document
+.getElementById("mobile-menu")
+.classList.toggle("active");
+
+}
+
+</script>
 
 </body>
 
