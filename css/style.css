@@ -246,3 +246,64 @@ section {
 
 
 }
+/* 소나무 갤러리 */
+
+.gallery {
+
+    display:grid;
+
+    grid-template-columns:repeat(4, 1fr);
+
+    gap:20px;
+
+    margin-top:40px;
+
+}
+
+
+.gallery img {
+
+    width:100%;
+
+    height:260px;
+
+    object-fit:cover;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+
+    transition:0.3s;
+
+}
+
+
+
+.gallery img:hover {
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* 모바일 갤러리 */
+
+@media(max-width:768px){
+
+
+.gallery {
+
+    grid-template-columns:repeat(2, 1fr);
+
+}
+
+
+.gallery img {
+
+    height:180px;
+
+}
+
+
+}
