@@ -346,5 +346,28 @@ document
 }
 
 </script>
+<script>
+
+function openImage(src){
+
+    let modal=document.getElementById("imageModal");
+
+    let image=document.getElementById("modalImage");
+
+
+    image.src=src;
+
+    modal.style.display="flex";
+
+}
+
+
+function closeImage(){
+
+    document.getElementById("imageModal").style.display="none";
+
+}
+
+</script>
 </body>
 </html>
