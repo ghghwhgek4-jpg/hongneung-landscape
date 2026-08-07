@@ -341,3 +341,95 @@ section {
     background:#1b5e20;
 
 }
+/* 문의 버튼 영역 */
+
+
+.floating-buttons {
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+z-index:999;
+
+}
+
+
+.call-btn,
+.kakao-btn {
+
+padding:15px 25px;
+
+border-radius:50px;
+
+color:white;
+
+text-decoration:none;
+
+font-weight:bold;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.25);
+
+text-align:center;
+
+}
+
+
+.call-btn {
+
+background:#2e7d32;
+
+}
+
+
+.kakao-btn {
+
+background:#FEE500;
+
+color:#3c1e1e;
+
+}
+
+
+
+/* 지도 버튼 */
+
+
+.map-box {
+
+margin-top:50px;
+
+padding:40px;
+
+background:#f7f7f7;
+
+border-radius:15px;
+
+}
+
+
+.map-button {
+
+display:inline-block;
+
+margin-top:20px;
+
+padding:12px 30px;
+
+background:#1b5e20;
+
+color:white;
+
+border-radius:30px;
+
+text-decoration:none;
+
+}
