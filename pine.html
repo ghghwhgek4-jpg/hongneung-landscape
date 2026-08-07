@@ -52,16 +52,26 @@
 <body>
 
 
+<body>
+
+
 <header>
 
 <div class="logo">
 
+<a href="index.html">
 <img src="images/logo.png" alt="홍능조경">
+</a>
 
 </div>
 
 
-<nav>
+<div class="menu-btn" onclick="toggleMenu()">
+☰
+</div>
+
+
+<nav id="mobile-menu">
 
 <a href="index.html">홈</a>
 
@@ -72,6 +82,7 @@
 <a href="contact.html">문의</a>
 
 </nav>
+
 
 </header>
 
@@ -310,7 +321,17 @@
 
 </footer>
 
+<script>
 
+function toggleMenu(){
+
+document
+.getElementById("mobile-menu")
+.classList.toggle("active");
+
+}
+
+</script>
 
 </body>
 
