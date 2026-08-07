@@ -10,3 +10,21 @@ document.addEventListener(
 
     }
 );
+function openImage(src){
+
+let modal=document.getElementById("imageModal");
+
+let img=document.getElementById("modalImage");
+
+img.src=src;
+
+modal.style.display="flex";
+
+}
+
+
+function closeImage(){
+
+document.getElementById("imageModal").style.display="none";
+
+}
