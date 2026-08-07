@@ -349,57 +349,67 @@ section {
 /* 문의 버튼 영역 */
 
 
+/* 모바일 하단 고정 전화 버튼 */
+
 .floating-buttons {
 
 position:fixed;
 
-right:20px;
+left:0;
 
-bottom:20px;
+bottom:0;
 
-display:flex;
+width:100%;
 
-flex-direction:column;
+display:none;
 
-gap:10px;
-
-z-index:999;
-
-}
-
-
-.call-btn,
-.kakao-btn {
-
-padding:15px 25px;
-
-border-radius:50px;
-
-color:white;
-
-text-decoration:none;
-
-font-weight:bold;
-
-box-shadow:0 5px 15px rgba(0,0,0,0.25);
-
-text-align:center;
+z-index:9999;
 
 }
 
 
 .call-btn {
 
+display:block;
+
+width:100%;
+
+padding:18px;
+
 background:#2e7d32;
+
+color:white;
+
+text-align:center;
+
+font-size:18px;
+
+font-weight:bold;
+
+text-decoration:none;
+
+box-shadow:0 -3px 10px rgba(0,0,0,0.2);
 
 }
 
 
-.kakao-btn {
 
-background:#FEE500;
+@media(max-width:768px){
 
-color:#3c1e1e;
+
+.floating-buttons{
+
+display:block;
+
+}
+
+
+body{
+
+padding-bottom:70px;
+
+}
+
 
 }
 
