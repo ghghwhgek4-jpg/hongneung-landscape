@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 Sitemap:
-https://ghghwhgek4-jpg.github.io/hongneung-landscape/sitemap.xml
+https://hongneung-landscape.pages.dev/sitemap.xml
