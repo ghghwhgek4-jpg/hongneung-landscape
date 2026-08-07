@@ -859,3 +859,29 @@ nav#mobile-menu.active {
 
 
 }
+/* 현재 페이지 메뉴 표시 */
+
+nav a.active {
+
+    color:#276738;
+
+    font-weight:700;
+
+}
+
+
+nav a.active::after {
+
+    content:"";
+
+    display:block;
+
+    width:100%;
+
+    height:3px;
+
+    background:#276738;
+
+    margin-top:5px;
+
+}
