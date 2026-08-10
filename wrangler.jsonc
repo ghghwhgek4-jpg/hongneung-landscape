@@ -11,5 +11,8 @@
       "/wrangler.jsonc",
       "/functions/*"
     ]
+  },
+  "observability": {
+    "enabled": false
   }
 }
