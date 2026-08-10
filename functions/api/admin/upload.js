@@ -1,5 +1,5 @@
-import { validSession } from "../../../_utils/auth.js";
-import { getFile, putFile, loadManifest, saveManifest, repoConfig } from "../../../_utils/github.js";
+import { validSession } from "../../_utils/auth.js";
+import { getFile, putFile, loadManifest, saveManifest } from "../../_utils/github.js";
 
 const CATS = new Set(["pine","planting","care","garden"]);
 const LABELS = {pine:"소나무",planting:"식재",care:"관리",garden:"정원·조경"};
