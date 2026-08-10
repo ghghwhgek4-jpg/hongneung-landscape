@@ -44,18 +44,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Universal image lightbox for galleries, products and service cards.
-  document.querySelectorAll('img[data-lightbox], .case-grid img, .photo-grid img, .manage-gallery img, .product-grid article img, .service-card img').forEach(img => {
-    if (img.closest('.brand')) return;
-    img.classList.add('zoomable-image');
-    img.setAttribute('tabindex', '0');
-    img.setAttribute('role', 'button');
-    img.setAttribute('aria-label', `${img.alt || '이미지'} 크게 보기`);
-    const open = () => openLightbox(img);
-    img.addEventListener('click', open);
-    img.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  function bindZoomImages(root = document) {
+    root.querySelectorAll('img[data-lightbox], .case-grid img, .photo-grid img, .manage-gallery img, .product-grid article img, .service-card img').forEach(img => {
+      if (img.closest('.brand') || img.dataset.zoomBound === '1') return;
+      img.dataset.zoomBound = '1';
+      img.classList.add('zoomable-image');
+      img.setAttribute('tabindex', '0');
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `${img.alt || '이미지'} 크게 보기`);
+      const open = () => openLightbox(img);
+      img.addEventListener('click', open);
+      img.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+      });
     });
-  });
+  }
+  bindZoomImages();
 
   // Lightbox navigation follows visible images in the current gallery/grid.
   let currentImages = [];
@@ -137,4 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
     touchStartX = null;
     if (Math.abs(dx) > 45) moveLightbox(dx > 0 ? -1 : 1);
   }, {passive:true});
+
+  // Re-bind lightbox after admin/API-driven gallery rendering.
+  const galleryRoot = document.getElementById('galleryGrid');
+  if (galleryRoot) {
+    new MutationObserver(() => bindZoomImages(galleryRoot)).observe(galleryRoot, {childList:true, subtree:true});
+  }
 });

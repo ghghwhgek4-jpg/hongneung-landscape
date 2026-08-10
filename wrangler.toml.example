@@ -1,0 +1,16 @@
+name = "hongneung-landscape"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hongneung-gallery"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "hongneung-gallery-media"
+
+[vars]
+# ADMIN_TOKEN은 여기에 넣지 마세요.
+# Cloudflare Dashboard > Workers & Pages > Settings > Variables and Secrets
+# 에서 Secret으로 ADMIN_TOKEN을 등록하세요.
