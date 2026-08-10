@@ -6,6 +6,10 @@
   "assets": {
     "directory": ".",
     "binding": "ASSETS",
-    "exclude": ["/worker.js","/wrangler.jsonc","/functions/*"]
+    "exclude": [
+      "/worker.js",
+      "/wrangler.jsonc",
+      "/functions/*"
+    ]
   }
 }
