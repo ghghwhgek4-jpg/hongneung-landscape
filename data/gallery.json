@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "seed-pine-01",
+      "title": "소나무 판매",
+      "category": "pine",
+      "categoryLabel": "소나무",
+      "src": "images/pine-product-01.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 10
+    },
+    {
+      "id": "seed-planting",
+      "title": "소나무 식재",
+      "category": "pine",
+      "categoryLabel": "소나무",
+      "src": "images/planting.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 20
+    },
+    {
+      "id": "seed-pruning",
+      "title": "전지·전정",
+      "category": "care",
+      "categoryLabel": "관리",
+      "src": "images/pruning.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 30
+    },
+    {
+      "id": "seed-garden-care",
+      "title": "정원관리",
+      "category": "garden",
+      "categoryLabel": "정원·조경",
+      "src": "images/garden-care.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 40
+    },
+    {
+      "id": "seed-tree-care",
+      "title": "수목관리",
+      "category": "care",
+      "categoryLabel": "관리",
+      "src": "images/tree-care.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 50
+    },
+    {
+      "id": "seed-residential",
+      "title": "전원주택 조경",
+      "category": "garden",
+      "categoryLabel": "정원·조경",
+      "src": "images/residential-landscape.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 60
+    },
+    {
+      "id": "seed-garden-pine",
+      "title": "조경 시공",
+      "category": "garden",
+      "categoryLabel": "정원·조경",
+      "src": "images/pine-product-02.jpg",
+      "managed": false,
+      "visible": true,
+      "order": 70
+    }
+  ]
+}

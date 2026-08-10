@@ -1,8 +1,10 @@
-import { json } from "./_auth.js";
-export async function onRequestGet({env}) {
-  if (!env.DB || !env.MEDIA) return json({items:[]});
-  const {results=[]} = await env.DB.prepare(
-    "SELECT id,key,title,alt,category,sort_order,published FROM gallery WHERE published=1 ORDER BY sort_order ASC,id DESC"
-  ).all();
-  return json({items:results.map(x=>({...x,url:"/api/image/"+encodeURIComponent(x.key)}))});
+import { loadManifest } from "../_utils/github.js";
+export async function onRequestGet({ env }) {
+  try {
+    const manifest = await loadManifest(env);
+    const items = (manifest.items || []).filter(x => x.visible !== false).sort((a,b)=>(a.order||0)-(b.order||0));
+    return Response.json({ok:true,items},{headers:{"Cache-Control":"no-store"}});
+  } catch (e) {
+    return Response.json({ok:false,error:"갤러리 정보를 불러오지 못했습니다."},{status:500});
+  }
 }
