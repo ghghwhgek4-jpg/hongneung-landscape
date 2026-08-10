@@ -1,5 +1,5 @@
-import { validSession } from "../../../_utils/auth.js";
-import { getFile, deleteFile, loadManifest, saveManifest } from "../../../_utils/github.js";
+import { validSession } from "../../_utils/auth.js";
+import { getFile, deleteFile, loadManifest, saveManifest } from "../../_utils/github.js";
 
 export async function onRequestPost({ request, env }) {
   if (!(await validSession(request, env.ADMIN_TOKEN))) return Response.json({ok:false,error:"로그인이 필요합니다."},{status:401});
