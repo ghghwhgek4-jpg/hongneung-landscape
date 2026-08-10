@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/wrangler.json",
+  "name": "hongneung-landscape",
+  "main": "worker.js",
+  "compatibility_date": "2026-08-10",
+  "assets": {
+    "directory": ".",
+    "binding": "ASSETS",
+    "exclude": ["/worker.js","/wrangler.jsonc","/functions/*"]
+  }
+}
