@@ -2,6 +2,7 @@ import { makeSession, sessionCookie, clearCookie, validSession } from "./functio
 import { getFile, putFile, deleteFile, loadManifest, saveManifest } from "./functions/_utils/github.js";
 
 const CATS = new Set(["pine", "planting", "care", "garden"]);
+
 const LABELS = {
   pine: "소나무",
   planting: "식재",
@@ -58,9 +59,7 @@ function parseDataUrl(dataUrl) {
 async function api(request, env, url) {
   const path = url.pathname;
 
-  /*
-   * 관리자 로그인
-   */
+  // 관리자 로그인
   if (path === "/api/admin/login") {
     if (request.method === "GET") {
       return J({
@@ -142,9 +141,7 @@ async function api(request, env, url) {
     );
   }
 
-  /*
-   * 갤러리 조회
-   */
+  // 갤러리 조회
   if (path === "/api/gallery" && request.method === "GET") {
     try {
       const manifest = await loadManifest(env);
@@ -172,9 +169,7 @@ async function api(request, env, url) {
     }
   }
 
-  /*
-   * 관리자 사진 업로드
-   */
+  // 관리자 사진 업로드
   if (path === "/api/admin/upload" && request.method === "POST") {
     if (!(await validSession(request, env.ADMIN_TOKEN))) {
       return J(
@@ -278,9 +273,7 @@ async function api(request, env, url) {
     }
   }
 
-  /*
-   * 관리자 사진 삭제
-   */
+  // 관리자 사진 삭제
   if (path === "/api/admin/delete" && request.method === "POST") {
     if (!(await validSession(request, env.ADMIN_TOKEN))) {
       return J(
