@@ -1,4 +1,4 @@
-import { loadManifest } from "../_utils/github.js";
+import { loadManifest } from "../../_utils/github.js";
 
 function json(data, status = 200) {
   return new Response(JSON.stringify(data), {
@@ -16,16 +16,25 @@ export async function onRequestGet({ env }) {
 
     const items = (manifest.items || [])
       .filter(item => item.visible !== false)
-      .sort((a, b) => (Number(a.order) || 0) - (Number(b.order) || 0));
+      .sort(
+        (a, b) =>
+          (Number(a.order) || 0) -
+          (Number(b.order) || 0)
+      );
 
     return json({
       ok: true,
       items
     });
   } catch (error) {
-    return json({
-      ok: false,
-      error: error?.message || "갤러리 정보를 불러오지 못했습니다."
-    }, 500);
+    return json(
+      {
+        ok: false,
+        error:
+          error?.message ||
+          "갤러리 정보를 불러오지 못했습니다."
+      },
+      500
+    );
   }
 }
