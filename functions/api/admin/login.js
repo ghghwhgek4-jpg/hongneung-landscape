@@ -10,12 +10,9 @@ function json(data, status = 200, headers = {}) {
 }
 
 export async function onRequestGet({ request, env }) {
-  const cookie = request.headers.get("Cookie") || "";
-  const match = cookie.match(/(?:^|;\s*)admin_session=([^;]+)/);
-
   return json({
-    ok: !!env.ADMIN_TOKEN && !!match,
-    configured: !!env.ADMIN_TOKEN
+    adminTokenConfigured: !!env.ADMIN_TOKEN,
+    testEnv: env.TEST_ENV || "NOT_FOUND"
   });
 }
 
