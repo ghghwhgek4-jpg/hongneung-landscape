@@ -10,9 +10,12 @@ function json(data, status = 200, headers = {}) {
 }
 
 export async function onRequestGet({ request, env }) {
+  const cookie = request.headers.get("Cookie") || "";
+  const match = cookie.match(/(?:^|;\s*)admin_session=([^;]+)/);
+
   return json({
-    adminTokenConfigured: !!env.ADMIN_TOKEN,
-    testEnv: env.TEST_ENV || "NOT_FOUND"
+    ok: !!env.ADMIN_TOKEN && !!match,
+    configured: !!env.ADMIN_TOKEN
   });
 }
 
@@ -24,7 +27,7 @@ export async function onRequestPost({ request, env }) {
       return json({
         ok: false,
         configured: false,
-        error: "ADMIN_TOKEN이 Runtime에 없습니다."
+        error: "ADMIN_TOKEN이 설정되지 않았습니다."
       }, 500);
     }
 
