@@ -141,7 +141,7 @@ async function api(request, env, url) {
     );
   }
 
-  // 갤러리 조회
+  // 일반 갤러리 조회
   if (path === "/api/gallery" && request.method === "GET") {
     try {
       const manifest = await loadManifest(env);
@@ -163,6 +163,47 @@ async function api(request, env, url) {
         {
           ok: false,
           error: "갤러리 정보를 불러오지 못했습니다."
+        },
+        500
+      );
+    }
+  }
+
+  // 관리자 갤러리 조회
+  // /api/admin/gallery?all=1
+  if (path === "/api/admin/gallery" && request.method === "GET") {
+    if (!(await validSession(request, env.ADMIN_TOKEN))) {
+      return J(
+        {
+          ok: false,
+          error: "로그인이 필요합니다."
+        },
+        401
+      );
+    }
+
+    try {
+      const manifest = await loadManifest(env);
+
+      const items = (manifest.items || [])
+        .slice()
+        .sort(
+          (a, b) =>
+            (Number(a.order) || 0) -
+            (Number(b.order) || 0)
+        );
+
+      return J({
+        ok: true,
+        items
+      });
+    } catch (error) {
+      return J(
+        {
+          ok: false,
+          error:
+            error?.message ||
+            "관리자 갤러리 정보를 불러오지 못했습니다."
         },
         500
       );
