@@ -1,41 +1,82 @@
-const COOKIE = "__Host-hn_admin";
-const MAX_AGE = 60 * 60 * 8;
+import {
+  makeSession,
+  sessionCookie,
+  clearCookie,
+  validSession
+} from "../../_utils/auth.js";
 
-function toB64Url(bytes) {
-  let s=""; for (const b of bytes) s += String.fromCharCode(b);
-  return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");
-}
-function fromB64Url(s) { return Uint8Array.from(atob(s.replace(/-/g,"+").replace(/_/g,"/") + "==="), c=>c.charCodeAt(0)); }
-
-async function hmac(secret, value) {
-  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), {name:"HMAC",hash:"SHA-256"}, false, ["sign","verify"]);
-  return new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value)));
-}
-
-export async function makeSession(secret) {
-  const ts = Math.floor(Date.now()/1000);
-  const payload = `${ts}`;
-  const sig = toB64Url(await hmac(secret,payload));
-  return `${payload}.${sig}`;
+function json(data, status = 200, headers = {}) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "cache-control": "no-store",
+      ...headers
+    }
+  });
 }
 
-export async function validSession(request, secret) {
-  if (!secret) return false;
-  const cookie = request.headers.get("Cookie") || "";
-  const match = cookie.match(new RegExp(`${COOKIE.replace(/[.*+?^${}()|[\\]\\]/g,"\\$&")}=([^;]+)`));
-  if (!match) return false;
-  const [tsText,sigText] = match[1].split(".");
-  const ts = Number(tsText);
-  if (!Number.isFinite(ts) || Math.floor(Date.now()/1000)-ts > MAX_AGE || ts > Math.floor(Date.now()/1000)+60) return false;
-  const expected = await hmac(secret, tsText);
-  let given;
-  try { given = fromB64Url(sigText); } catch { return false; }
-  if (given.length !== expected.length) return false;
-  let diff=0; for(let i=0;i<given.length;i++) diff |= given[i]^expected[i];
-  return diff===0;
+export async function onRequestGet({ request, env }) {
+  return json({
+    ok: await validSession(request, env.ADMIN_TOKEN),
+    configured: !!env.ADMIN_TOKEN
+  });
 }
 
-export function sessionCookie(value) {
-  return `${COOKIE}=${value}; Path=/; Max-Age=${MAX_AGE}; HttpOnly; Secure; SameSite=Lax`;
+export async function onRequestPost({ request, env }) {
+  try {
+    const { password } = await request.json();
+
+    if (!env.ADMIN_TOKEN) {
+      return json({
+        ok: false,
+        configured: false,
+        error: "ADMIN_TOKEN이 설정되지 않았습니다."
+      }, 500);
+    }
+
+    if (typeof password !== "string") {
+      return json({
+        ok: false,
+        error: "비밀번호 형식이 올바르지 않습니다."
+      }, 400);
+    }
+
+    if (password !== env.ADMIN_TOKEN) {
+      return json({
+        ok: false,
+        configured: true,
+        error: "인증에 실패했습니다. Cloudflare ADMIN_TOKEN을 확인하세요."
+      }, 401);
+    }
+
+    const session = await makeSession(env.ADMIN_TOKEN);
+
+    return json(
+      {
+        ok: true,
+        configured: true
+      },
+      200,
+      {
+        "Set-Cookie": sessionCookie(session)
+      }
+    );
+
+  } catch (e) {
+    return json({
+      ok: false,
+      error: e?.message || "로그인 요청이 올바르지 않습니다."
+    }, 400);
+  }
 }
-export function clearCookie() { return `${COOKIE}=; Path=/; Max-Age=0; HttpOnly; Secure; SameSite=Lax`; }
+
+export async function onRequestDelete() {
+  return json(
+    { ok: true },
+    200,
+    {
+      "Set-Cookie": clearCookie()
+    }
+  );
+}
