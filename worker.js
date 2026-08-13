@@ -404,6 +404,7 @@ export default {
       return api(request, env, url);
     }
 
+    // redeploy
     return env.ASSETS.fetch(request);
   }
 };
